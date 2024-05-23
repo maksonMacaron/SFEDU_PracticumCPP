@@ -1,20 +1,75 @@
-﻿// SFEDU_PracticumCPP.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
-//
-
-#include <iostream>
+﻿#include <iostream>
+#include <string>
+ 
+using namespace std;
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    setlocale(LC_ALL, "RU");
+    srand(time(NULL));
+
+    //Контрольная работа № 1
+    //16.	Сравнить суммы элементов диагоналей двумерного массива
+
+    int rows = 2 + rand() % 5;
+    int cols = 2 + rand() % 5;
+
+    cout << "Массив" << "[" << rows << ", " << cols << "]";
+    cout << "\n\r";
+    cout << "\n\r";
+
+
+    int** arr = new int* [rows];
+
+    for (int i = 0; i < rows; ++i) 
+    {
+        arr[i] = new int[cols];
+        for (int j = 0; j < cols; ++j) 
+        {
+            arr[i][j] = 1 + rand() % 20;
+        }
+    }
+
+    int sumMainDiagonal = 0;
+    int sumSecondaryDiagonal = 0;
+
+    for (int i = 0; i < rows; ++i)
+    {
+        for (int j = 0; j < cols; ++j)
+        {
+            if (i == j)
+                sumMainDiagonal += arr[i][j];
+
+            if (j == cols - 1 - i)
+                sumSecondaryDiagonal += arr[i][j];
+
+            cout << arr[i][j] << "\t";
+        }
+        cout << "\r\n";
+    }
+
+    string result = "";
+
+    if (sumMainDiagonal > sumSecondaryDiagonal)
+    {
+        result = "больше";
+    }
+    else if (sumMainDiagonal < sumSecondaryDiagonal)
+    {
+        result = "меньше";
+    }
+    else 
+    {
+        result = "равна";
+    }
+    cout << "\r\n";
+    cout << "Сумма главной диагонали (" << sumMainDiagonal << ") " << result <<" побочной (" << sumSecondaryDiagonal << ")";
+
+    getchar();
+
+    for (int i = 0; i < rows; ++i) 
+    {
+        delete[] arr[i];
+    }
+    delete[] arr;
 }
-
-// Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
-// Отладка программы: F5 или меню "Отладка" > "Запустить отладку"
-
-// Советы по началу работы 
-//   1. В окне обозревателя решений можно добавлять файлы и управлять ими.
-//   2. В окне Team Explorer можно подключиться к системе управления версиями.
-//   3. В окне "Выходные данные" можно просматривать выходные данные сборки и другие сообщения.
-//   4. В окне "Список ошибок" можно просматривать ошибки.
-//   5. Последовательно выберите пункты меню "Проект" > "Добавить новый элемент", чтобы создать файлы кода, или "Проект" > "Добавить существующий элемент", чтобы добавить в проект существующие файлы кода.
-//   6. Чтобы снова открыть этот проект позже, выберите пункты меню "Файл" > "Открыть" > "Проект" и выберите SLN-файл.
