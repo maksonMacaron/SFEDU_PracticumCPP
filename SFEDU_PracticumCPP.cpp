@@ -16,8 +16,8 @@ int main()
 
     cout << "Массив" << "[" << rows << ", " << cols << "]";
     cout << "\n\r";
-    cout << "\n\r";
 
+    cout << "\n\r";
 
     int** arr = new int* [rows];
 
